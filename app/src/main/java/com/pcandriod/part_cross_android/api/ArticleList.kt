@@ -1,7 +1,6 @@
 package com.pcandriod.part_cross_android.api
 
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
 
 data class ArticleList(
     @SerializedName("isSuccess")
@@ -11,7 +10,7 @@ data class ArticleList(
     val message: String,
 
     @SerializedName("data")
-    val data: Data,
+    val data: List<Data>,
 )
 
 data class Data(

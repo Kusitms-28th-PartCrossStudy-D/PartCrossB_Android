@@ -26,7 +26,10 @@
 
         <activity
             android:name=".detail.DetailActivity"
-            android:exported="true"/>
+            android:exported="false"/>
+
+        <activity android:name=".write.WriteActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
