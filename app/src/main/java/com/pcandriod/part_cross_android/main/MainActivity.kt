@@ -1,10 +1,11 @@
 package com.pcandriod.part_cross_android.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.pcandriod.part_cross_android.databinding.ActivityMainBinding
+import com.pcandriod.part_cross_android.detail.DetailActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -34,11 +35,22 @@ class MainActivity : AppCompatActivity() {
         itemPost.add(PostItem("제목9", "내용9"))
         itemPost.add(PostItem("제목10", "내용10"))
 
+        binding.ibtnEdit.setOnClickListener {
+            val intent = Intent(this, DetailActivity::class.java)
+            startActivity(intent)
+        }
 
         val postAdapter = PostAdapter(itemPost)
         postAdapter.notifyDataSetChanged()
 
         binding.rvPostList.adapter = postAdapter
+
+        postAdapter.setOnItemClickListener { position ->
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("item_index", position)
+            Toast.makeText(this, "${position+1} 번째 글 클릭!", Toast.LENGTH_SHORT).show()
+            startActivity(intent)
+        }
 
     }
 }
