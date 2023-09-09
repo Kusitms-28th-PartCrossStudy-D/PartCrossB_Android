@@ -1,29 +1,29 @@
 package com.pcandriod.part_cross_android.api
 
+import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 
 data class ArticleList(
-    @Json(name = "data")
-    val `data`: List<Data>,
-    @Json(name = "isSuccess")
+    @SerializedName("isSuccess")
     val isSuccess: Boolean,
-    @Json(name = "message")
-    val message: String
-) {
-    data class Data(
-        @Json(name = "articleId")
-        val articleId: Int,
-        @Json(name = "body")
-        val body: String,
-        @Json(name = "createdAt")
-        val createdAt: String,
-        @Json(name = "description")
-        val description: String,
-        @Json(name = "tagList")
-        val tagList: List<String>,
-        @Json(name = "title")
-        val title: String,
-        @Json(name = "updatedAt")
-        val updatedAt: String
-    )
-}
+
+    @SerializedName("message")
+    val message: String,
+
+    @SerializedName("data")
+    val data: Data,
+)
+
+data class Data(
+    @SerializedName("articleId")
+    val articleId: Int,
+
+    @SerializedName("title")
+    val title: String,
+
+    @SerializedName("description")
+    val description: String,
+
+    @SerializedName("body")
+    val body: String,
+)
