@@ -31,6 +31,7 @@ object RetrofitClient {
 
     private var gson = GsonBuilder().setLenient().create()
 
+
     private val client = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))

@@ -26,4 +26,24 @@ data class ArticleList(
         @Json(name = "updatedAt")
         val updatedAt: String
     )
+
+    data class ArticleResponse(
+        @Json(name="isSuccess")
+        val isSuccess:Boolean,
+        @Json(name="message")
+        val message:String,
+        @Json(name="data")
+        val data: ArticleData
+    )
+
+    data class ArticleData(
+        val articleId:Int,
+        val title : String,
+        val description:String,
+        val body:String,
+        val tagList : List<String>,
+        val createdAt : String,
+        val updateAt:String
+
+    )
 }
