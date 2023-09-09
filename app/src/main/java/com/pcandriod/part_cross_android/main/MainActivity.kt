@@ -2,16 +2,20 @@ package com.pcandriod.part_cross_android.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import com.pcandriod.part_cross_android.api.ArticleList
+import com.pcandriod.part_cross_android.api.RetrofitClient
 import com.pcandriod.part_cross_android.api.RetrofitService
 import com.pcandriod.part_cross_android.databinding.ActivityMainBinding
 import com.pcandriod.part_cross_android.detail.DetailActivity
 import com.pcandriod.part_cross_android.write.WriteActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,6 +30,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         initView()
+
+        val retrofit = RetrofitClient.getInstance().create(RetrofitService::class.java)
+
+        retrofit.getPostList()
+            .enqueue(object: Callback<ArticleList> {
+                override fun onResponse(call: Call<ArticleList>, response: Response<ArticleList>) {
+                    if (response.isSuccessful) {
+                        Log.d("레트로핏", "성공")
+                    }
+                }
+
+                override fun onFailure(call: Call<ArticleList>, t: Throwable) {
+                    Log.d("레트로핏", "실패")
+                }
+            })
     }
 
 
@@ -61,13 +80,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getArticleList() {
-        lifecycleScope.launch {
-            val response = articleService.getPostList()
-            val statusCode = response
-
-            withContext(Dispatchers.Main) {
-            }
-        }
-    }
 }

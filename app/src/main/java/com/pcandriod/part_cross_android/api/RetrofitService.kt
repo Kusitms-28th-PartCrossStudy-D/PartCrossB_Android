@@ -1,10 +1,13 @@
 package com.pcandriod.part_cross_android.api
 
-import android.telecom.Call
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface RetrofitService {
     @GET("/api/vl/articles")
-    fun getPostList(): retrofit2.Call<ArticleList>
+    fun getPostList(): Call<ArticleList>
+
 
 }
