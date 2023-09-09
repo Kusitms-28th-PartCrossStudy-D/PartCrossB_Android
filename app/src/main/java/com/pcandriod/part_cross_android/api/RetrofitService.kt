@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RetrofitService {
-    @GET("/api/vl/articles")
+    @GET("/api/v1/articles")
     fun getPostList(): Call<ArticleList>
 
 
